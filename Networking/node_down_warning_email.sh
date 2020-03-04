@@ -1,6 +1,6 @@
 #!/bin/bash
 
-fir i in$@
+for i in$@
 do
 ping -c 1 $i &> /dev/null
 

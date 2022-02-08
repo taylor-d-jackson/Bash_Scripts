@@ -1,0 +1,19 @@
+STORAGEACCT=$(az storage account create \
+                --resource-group $rg \
+                --name engineeringdocs$RANDOM \
+                --sku Standard_LRS \
+                --query "name" | tr -d '"')
+
+
+
+STORAGEKEY=$(az storage account keys list \
+                --resource-group $rg \
+                --account-name $STORAGEACCT \
+                --query "[0].value" | tr -d '"')
+
+
+
+az storage share create \
+    --account-name $STORAGEACCT \
+    --account-key $STORAGEKEY \
+    --name "erp-data-share"
